@@ -1,0 +1,206 @@
+/* ===== VARIABEL WARNA ===== */
+:root {
+  --kertas: #F3F8E3;
+  --permukaan: #FAFCFD;
+  --tinta: #115566;
+  --tinta-pudar: #3F6A72;
+  --garis: #CBD99A;
+  --utama: #1B693C;
+  --utama-gelap: #14522E;
+  --aksen-kuning: #E4EC81;
+  --bs-body-bg: var(--kertas);
+  --bs-body-color: var(--tinta);
+  --bs-border-color: var(--garis);
+  --bs-primary: var(--utama);
+  --bs-primary-rgb: 27, 105, 60;
+  --bs-link-color: var(--utama);
+}
+
+/* ===== DASAR (MOBILE-FIRST) ===== */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--kertas);
+  color: var(--tinta);
+}
+
+h1, h2, h3, .navbar-brand, .modal-title {
+  font-weight: 700;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--tinta-pudar);
+}
+
+.btn {
+  font-weight: 700;
+}
+
+/* ===== HEADER ===== */
+.bar-utama {
+  background: var(--utama);
+  border-bottom: 3px solid var(--aksen-kuning);
+}
+
+.badge-k5 {
+  background: var(--aksen-kuning);
+  color: var(--tinta);
+  font-weight: 700;
+  vertical-align: middle;
+}
+
+.judul-halaman {
+  padding-top: 1.75rem;
+  padding-bottom: 1.5rem;
+}
+
+.judul-halaman h1 {
+  font-size: 1.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.judul-halaman p {
+  color: var(--tinta-pudar);
+}
+
+/* ===== KARTU & FORM ===== */
+.card {
+  background: var(--permukaan);
+  border: 1px solid var(--garis);
+  border-radius: 0.5rem;
+}
+
+.form-control,
+.form-select {
+  background-color: #fff;
+  border-color: var(--garis);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--utama);
+  box-shadow: 0 0 0 0.2rem rgba(27, 105, 60, 0.2);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--utama);
+  --bs-btn-border-color: var(--utama);
+  --bs-btn-hover-bg: var(--utama-gelap);
+  --bs-btn-hover-border-color: var(--utama-gelap);
+  --bs-btn-active-bg: var(--utama-gelap);
+  --bs-btn-active-border-color: var(--utama-gelap);
+  --bs-btn-focus-shadow-rgb: 27, 105, 60;
+}
+
+/* ===== TABEL JADWAL ===== */
+.tabel-jadwal {
+  --bs-border-color: var(--garis);
+  min-width: 700px;
+  font-size: 0.9rem;
+  background: var(--permukaan);
+}
+
+.tabel-jadwal thead {
+  --bs-table-bg: #EAF1B4;
+  --bs-table-color: var(--tinta);
+}
+
+.tabel-jadwal thead th {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.tabel-jadwal.table-hover > tbody > tr.baris-hari > *,
+.tabel-jadwal.table-hover > tbody > tr.baris-hari:hover > * {
+  --bs-table-bg-state: var(--tinta);
+  --bs-table-color-state: #E4EC81;
+  background-color: var(--tinta);
+  color: #E4EC81;
+}
+
+.baris-hari th {
+  padding: 0.4rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-left: 4px solid var(--aksen-kuning);
+}
+
+.tabel-jadwal tbody tr:not(.baris-hari) > td:first-child {
+  border-left: 6px solid var(--aksen, var(--garis));
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.tabel-jadwal tbody tr:not(.baris-hari) > td:nth-child(2) {
+  font-weight: 700;
+}
+
+.tabel-jadwal td {
+  vertical-align: middle;
+}
+
+.badge-smt {
+  background: rgba(17, 85, 102, 0.1);
+  color: var(--tinta);
+  font-weight: 700;
+}
+
+.total-sks {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: var(--permukaan);
+  border: 1px solid var(--garis);
+  border-top: 0;
+  border-radius: 0 0 0.5rem 0.5rem;
+}
+
+#totalSks {
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--utama);
+  transition: transform 0.18s ease;
+}
+
+/* ===== WARNA PER MATA KULIAH ===== */
+.mk-color-0 { --bs-table-bg: #E8F1E0; --bs-table-hover-bg: #DAE8CE; --aksen: #7FA46A; }
+.mk-color-1 { --bs-table-bg: #E3EEF6; --bs-table-hover-bg: #D3E4F0; --aksen: #6A9CBF; }
+.mk-color-2 { --bs-table-bg: #F6F1D9; --bs-table-hover-bg: #EEE7BF; --aksen: #C2AD52; }
+.mk-color-3 { --bs-table-bg: #F8E8E0; --bs-table-hover-bg: #F1D8CB; --aksen: #D08A6B; }
+.mk-color-4 { --bs-table-bg: #ECE8F5; --bs-table-hover-bg: #DFD9EE; --aksen: #9488C4; }
+.mk-color-5 { --bs-table-bg: #DFF1EF; --bs-table-hover-bg: #CDE8E5; --aksen: #5FA9A3; }
+
+/* ===== FOOTER ===== */
+.footer-situs {
+  padding: 1.25rem 0;
+  background: var(--tinta);
+  color: #E4EC81;
+  text-align: center;
+}
+
+/* ===== RESPONSIF (TABLET KE ATAS) ===== */
+@media (min-width: 768px) {
+  .judul-halaman {
+    padding-top: 2.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .judul-halaman h1 {
+    font-size: 2.1rem;
+  }
+}
+
+/* ===== RESPONSIF (DESKTOP) ===== */
+@media (min-width: 992px) {
+  .panel-filter {
+    position: sticky;
+    top: 1rem;
+  }
+}
