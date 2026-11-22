@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Jadwal Kuliah</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- CSS Kelompok -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg bar-utama">
+        <div class="container">
+            <a class="navbar-brand text-white" href="#">
+                Jadwal Kuliah
+                <span class="badge badge-k5">K5</span>
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse" data-bs-target="#menuNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuNavbar">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#jadwal">Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="#"
+                           data-bs-toggle="modal" data-bs-target="#modalTambah">
+                            Tambah Jadwal
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+
+        <!-- Judul Halaman -->
+        <section class="judul-halaman">
+            <h1>Jadwal Kuliah Semester</h1>
+            <p>
+                Lihat, cari, dan atur jadwal mata kuliah per hari
+                tanpa risiko bentrok ruang.
+            </p>
+        </section>
+
+        <div class="row g-4">
+
+            <!-- Filter Jadwal -->
+            <div class="col-lg-3">
+                <section class="card p-3 panel-filter">
+                    <h5 class="mb-3">Filter &amp; Cari</h5>
+
+                    <div class="mb-3">
+                        <label for="filterHari" class="form-label">Hari</label>
+                        <select id="filterHari" class="form-select">
+                            <option value="">Semua</option>
+                            <option value="Senin">Senin</option>
+                            <option value="Selasa">Selasa</option>
+                            <option value="Rabu">Rabu</option>
+                            <option value="Kamis">Kamis</option>
+                            <option value="Jumat">Jumat</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="filterSemester" class="form-label">Semester</label>
+                        <select id="filterSemester" class="form-select">
+                            <option value="">Semua</option>
+                            <option value="1">Semester 1</option>
+                            <option value="2">Semester 2</option>
+                            <option value="3">Semester 3</option>
+                            <option value="4">Semester 4</option>
+                            <option value="5">Semester 5</option>
+                            <option value="6">Semester 6</option>
+                            <option value="7">Semester 7</option>
+                            <option value="8">Semester 8</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="cariJadwal" class="form-label">
+                            Cari mata kuliah / dosen
+                        </label>
+                        <input type="text" id="cariJadwal"
+                               class="form-control"
+                               placeholder="Ketik untuk mencari">
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tabel Jadwal -->
+            <div class="col-lg-9" id="jadwal">
+
+                <!-- Peringatan Konflik -->
+                <div id="peringatanKonflik"
+                     class="alert alert-warning d-none"
+                     role="alert">
+                    <h6 class="alert-heading">Peringatan Konflik Jadwal!</h6>
+                    <p id="pesanKonflik" class="mb-0">
+                        Terdapat jadwal kuliah yang bertabrakan.
+                    </p>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover tabel-jadwal">
+
+                        <thead>
+                            <tr>
+                                <th>Kode</th>
+                                <th>Mata Kuliah</th>
+                                <th>Dosen</th>
+                                <th>Ruang</th>
+                                <th>Jam</th>
+                                <th>SMT</th>
+                                <th>SKS</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tabelJadwal">
+
+                            <!-- Jadwal Hari Senin -->
+                            <tr class="baris-hari">
+                                <th colspan="8">Senin</th>
+                            </tr>
+
+                            <tr class="mk-color-0">
+                                <td>SI101</td>
+                                <td>Algoritma dan Pemrograman</td>
+                                <td>Ir. Hendra Wijaya</td>
+                                <td>R-101</td>
+                                <td>07:30 - 09:10</td>
+                                <td><span class="badge badge-smt">Smt 1</span></td>
+                                <td>3</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalHapus">
+                                        Hapus
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <tr class="mk-color-1">
+                                <td>SI301</td>
+                                <td>Pemrograman Web Dasar</td>
+                                <td>Dr. Budi Santoso</td>
+                                <td>Lab-1</td>
+                                <td>08:00 - 09:40</td>
+                                <td><span class="badge badge-smt">Smt 3</span></td>
+                                <td>3</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalHapus">
+                                        Hapus
+                                    </button>
+                                </td>
+                            </tr>
+
+                            <!-- Jadwal Hari Selasa -->
+                            <tr class="baris-hari">
+                                <th colspan="8">Selasa</th>
+                            </tr>
+
+                            <tr class="mk-color-2">
+                                <td>SI303</td>
+                                <td>Basis Data</td>
+                                <td>Dr. Ratna Dewi</td>
+                                <td>R-201</td>
+                                <td>10:00 - 11:40</td>
+                                <td><span class="badge badge-smt">Smt 3</span></td>
+                                <td>3</td>
+                                <td>
+                                    <button type="button"
+                                            class="btn btn-sm btn-outline-danger"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#modalHapus">
+                                        Hapus
+                                    </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Total SKS -->
+                <div class="total-sks">
+                    <span>Total SKS</span>
+                    <span id="totalSks">9 SKS</span>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Tambah Jadwal -->
+    <div class="modal fade" id="modalTambah" tabindex="-1"
+         aria-labelledby="judulModalTambah" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="judulModalTambah">
+                        Tambah Jadwal Kuliah
+                    </h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form id="formJadwal">
+                        <div class="row g-3">
+
+                            <div class="col-md-4">
+                                <label for="kodeMk" class="form-label">Kode Mata Kuliah</label>
+                                <input type="text" id="kodeMk"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-8">
+                                <label for="namaMk" class="form-label">Nama Mata Kuliah</label>
+                                <input type="text" id="namaMk"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="namaDosen" class="form-label">Nama Dosen</label>
+                                <input type="text" id="namaDosen"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label for="ruang" class="form-label">Ruangan</label>
+                                <input type="text" id="ruang"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="hari" class="form-label">Hari</label>
+                                <select id="hari" class="form-select" required>
+                                    <option value="">Pilih Hari</option>
+                                    <option value="Senin">Senin</option>
+                                    <option value="Selasa">Selasa</option>
+                                    <option value="Rabu">Rabu</option>
+                                    <option value="Kamis">Kamis</option>
+                                    <option value="Jumat">Jumat</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="jamMulai" class="form-label">Jam Mulai</label>
+                                <input type="time" id="jamMulai"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="jamSelesai" class="form-label">Jam Selesai</label>
+                                <input type="time" id="jamSelesai"
+                                       class="form-control" required>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="semester" class="form-label">Semester</label>
+                                <select id="semester" class="form-select" required>
+                                    <option value="">Pilih Semester</option>
+                                    <option value="1">Semester 1</option>
+                                    <option value="2">Semester 2</option>
+                                    <option value="3">Semester 3</option>
+                                    <option value="4">Semester 4</option>
+                                    <option value="5">Semester 5</option>
+                                    <option value="6">Semester 6</option>
+                                    <option value="7">Semester 7</option>
+                                    <option value="8">Semester 8</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="sks" class="form-label">SKS</label>
+                                <input type="number" id="sks"
+                                       class="form-control"
+                                       min="1" max="6" required>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Batal
+                    </button>
+
+                    <button type="submit" form="formJadwal"
+                            class="btn btn-primary">
+                        Tambah Jadwal
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Konfirmasi Hapus -->
+    <div class="modal fade" id="modalHapus" tabindex="-1"
+         aria-labelledby="judulModalHapus" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h5 class="modal-title" id="judulModalHapus">
+                        Hapus Jadwal
+                    </h5>
+                    <button type="button" class="btn-close"
+                            data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    Apakah kamu yakin ingin menghapus jadwal ini?
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">
+                        Batal
+                    </button>
+
+                    <button type="button" class="btn btn-danger"
+                            id="btnKonfirmasiHapus">
+                        Hapus
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-situs mt-5">
+        <div class="container">
+            <p class="mb-0">
+                &copy; 2026 Sistem Jadwal Kuliah. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- JavaScript Kelompok -->
+    <script src="js/script.js"></script>
+
+</body>
+</html>
