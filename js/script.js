@@ -263,8 +263,10 @@ $(document).ready(function () {
   }
 
   // =========================
-  // Alert konflik
+  // Alert konflik & sukses
   // =========================
+  var timeoutSukses = null;
+
   function sembunyikanKonflik() {
     $("#peringatanKonflik").addClass("d-none");
     $("#pesanKonflik").text("");
@@ -277,9 +279,45 @@ $(document).ready(function () {
       + konflik.ruang + ", " + konflik.jam_mulai + "-" + konflik.jam_selesai + ").";
 
     $("#pesanKonflik").text(pesan);
-    // Pastikan alert menggunakan gaya danger sesuai PRD
-    $("#peringatanKonflik").removeClass("d-none alert-warning").addClass("alert-danger");
+    // Pastikan alert menggunakan gaya danger dan punya tombol close
+    $("#peringatanKonflik").removeClass("d-none alert-warning").addClass("alert-danger alert-dismissible");
+
+    // Tambahkan tombol X untuk menutup alert jika belum ada
+    if ($("#peringatanKonflik .btn-close-konflik").length === 0) {
+      $("#peringatanKonflik").prepend(
+        "<button type='button' class='btn-close btn-close-konflik' aria-label='Tutup'></button>"
+      );
+    }
   }
+
+  // Menampilkan popup sukses tambah jadwal (hilang otomatis setelah 3 detik)
+  function tampilkanSukses(pesan) {
+    // Buat elemen popup sukses jika belum ada
+    if ($("#popupSukses").length === 0) {
+      var suksesHtml = ""
+        + "<div id='popupSukses' class='alert alert-success shadow d-none' role='alert' "
+        + "style='position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:1060; min-width:280px; max-width:360px; text-align:center;'>"
+        +   "<span id='pesanSukses'></span>"
+        + "</div>";
+      $("body").append(suksesHtml);
+    }
+
+    $("#pesanSukses").text(pesan);
+    $("#popupSukses").removeClass("d-none");
+
+    if (timeoutSukses) {
+      clearTimeout(timeoutSukses);
+    }
+    timeoutSukses = setTimeout(function () {
+      $("#popupSukses").addClass("d-none");
+      $("#pesanSukses").text("");
+    }, 6000);
+  }
+
+  // Event: Tutup alert konflik lewat tombol X
+  $("#peringatanKonflik").on("click", ".btn-close-konflik", function () {
+    sembunyikanKonflik();
+  });
 
   // =========================
   // Event: Filter dan Search
@@ -321,6 +359,11 @@ $(document).ready(function () {
     // Cek konflik sebelum push()
     var konflik = cekKonflik(jadwalBaru);
     if (konflik) {
+      // Tutup form tambah jadwal langsung saat konflik
+      var modalTambahEl = $("#modalTambah")[0];
+      if (modalTambahEl) {
+        bootstrap.Modal.getOrCreateInstance(modalTambahEl).hide();
+      }
       tampilkanKonflik(jadwalBaru, konflik);
       return;
     }
@@ -331,12 +374,13 @@ $(document).ready(function () {
     bersihkanError();
 
     // Tutup modal tambah setelah berhasil
-    var modalTambahEl = $("#modalTambah")[0];
-    if (modalTambahEl) {
-      bootstrap.Modal.getOrCreateInstance(modalTambahEl).hide();
+    var modalTambahSuksesEl = $("#modalTambah")[0];
+    if (modalTambahSuksesEl) {
+      bootstrap.Modal.getOrCreateInstance(modalTambahSuksesEl).hide();
     }
 
     applyFilter();
+    tampilkanSukses("Jadwal berhasil ditambahkan");
   });
 
   // Bersihkan error saat modal tambah ditutup
