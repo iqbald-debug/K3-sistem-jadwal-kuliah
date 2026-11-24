@@ -16,7 +16,7 @@
   --bs-link-color: var(--utama);
 }
 
-/* ===== DASAR (MOBILE-FIRST) ===== */
+/* ===== DASAR ===== */
 body {
   font-family: 'Poppins', Arial, Helvetica, sans-serif;
   background: var(--kertas);
@@ -49,7 +49,7 @@ h1, h2, h3, .navbar-brand, .modal-title {
   vertical-align: middle;
 }
 
-/* Jarak antar item navbar, khususnya Jadwal dan Tambah Jadwal */
+/* Jarak antar item navbar*/
 .bar-utama .navbar-nav {
   gap: 1.25rem;
 }
